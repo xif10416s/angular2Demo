@@ -33,6 +33,8 @@ export class HeroesComponent  implements OnInit  {
     gotoDetail() {
         this.router.navigate(['HeroDetail', { id: this.selectedHero.id }]);
     }
+    trackByHeroes(index: number, hero: Hero) {
+        return hero.id; }
 }
 
 

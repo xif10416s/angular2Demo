@@ -6,3 +6,10 @@
         </div>
     </div>
 </div>
+<p *ngIf="heroes.length
+ > 3">There are many heroes!</p>
+<input #box (keyup)="0">
+<p>{{box.value}}</p>
+
+<input #box (keyup.enter)="values=box.value"  (blur)="values=box.value">
+<p>{{values}}</p>
