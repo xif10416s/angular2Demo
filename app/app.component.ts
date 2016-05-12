@@ -1,5 +1,4 @@
-import { Component ,Provider,Inject,OpaqueToken}       from '@angular/core';
-import { HTTP_PROVIDERS }    from '@angular/http';
+import { Component ,provide,Inject,OpaqueToken}       from '@angular/core';
 
 import { HeroService }     from './hero.service';
 import { HeroesComponent } from './heroes.component';
@@ -9,6 +8,9 @@ import { HeroFormComponent } from './hero-form.component'
 import { Config,CONFIG } from './app-config';
 import {HighlightDirective} from './highlight.directive'
 import { LoginFormComponent } from './login-form.component'
+import { DynamicForm }     from './dynamic-form/dynamic-form.component';
+import { QuestionService } from './dynamic-form/question.service';
+import { Title } from '@angular/platform-browser';
 
 export let APP_CONFIG = new OpaqueToken('app.config');
 
@@ -18,11 +20,11 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
     selector: 'my-app',
     templateUrl: 'app/templates/app.component.html',
     styleUrls: ['app/style/app.component.css'],
-    directives: [ROUTER_DIRECTIVES, HeroFormComponent , HighlightDirective,LoginFormComponent],
+    directives: [ROUTER_DIRECTIVES, HeroFormComponent, HighlightDirective, LoginFormComponent, DynamicForm],
     providers: [
         ROUTER_PROVIDERS,
         HeroService,
-        new Provider(APP_CONFIG, {useValue: CONFIG},HTTP_PROVIDERS)
+        provide(APP_CONFIG, {useValue: CONFIG}), QuestionService
     ]
 })
 
@@ -47,8 +49,11 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 
 export class AppComponent {
     title
-    constructor(@Inject(APP_CONFIG) config: Config){
+    questions:any[]
+    constructor(@Inject(APP_CONFIG) config:Config , service: QuestionService,private titleService: Title) {
         this.title = config.title
+        this.questions=service.getQuestions()
+        titleService.setTitle(config.apiEndpoint)
     }
 
 }
