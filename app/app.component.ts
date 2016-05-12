@@ -10,6 +10,7 @@ import {HighlightDirective} from './highlight.directive'
 import { LoginFormComponent } from './login-form.component'
 import { DynamicForm }     from './dynamic-form/dynamic-form.component';
 import { QuestionService } from './dynamic-form/question.service';
+import { MdCheckBox } from './ag2-Material/checkbox.component';
 import { Title } from '@angular/platform-browser';
 
 export let APP_CONFIG = new OpaqueToken('app.config');
@@ -20,7 +21,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
     selector: 'my-app',
     templateUrl: 'app/templates/app.component.html',
     styleUrls: ['app/style/app.component.css'],
-    directives: [ROUTER_DIRECTIVES, HeroFormComponent, HighlightDirective, LoginFormComponent, DynamicForm],
+    directives: [ROUTER_DIRECTIVES, HeroFormComponent, HighlightDirective, LoginFormComponent, DynamicForm,MdCheckBox],
     providers: [
         ROUTER_PROVIDERS,
         HeroService,
@@ -44,6 +45,11 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
         path: '/heroes',
         name: 'Heroes',
         component: HeroesComponent
+    },
+    {
+        path: '/mdcheckbox',
+        name: 'Mdcheckbox',
+        component: MdCheckBox
     }
 ])
 
