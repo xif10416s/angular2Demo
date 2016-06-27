@@ -15,43 +15,39 @@ import { Title } from '@angular/platform-browser';
 
 export let APP_CONFIG = new OpaqueToken('app.config');
 
+export const routes:RouterConfig = [
+    {
+        path: 'dashboard',
+        component: DashboardComponent
+    },
+    {
+        path: 'detail/:id',
+        component: HeroDetailComponent
+    },
+    {
+        path: 'heroes',
+        component: HeroesComponent
+    },
+    {
+        path: 'mdcheckbox',
+        component: MdCheckBox
+    }
+]
 
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { RouterConfig, ROUTER_DIRECTIVES, provideRouter } from '@angular/router';
 @Component({
     selector: 'my-app',
     templateUrl: 'app/templates/app.component.html',
     styleUrls: ['app/style/app.component.css'],
     directives: [ROUTER_DIRECTIVES, HeroFormComponent, HighlightDirective, LoginFormComponent, DynamicForm,MdCheckBox],
     providers: [
-        ROUTER_PROVIDERS,
+        provideRouter(routes),
         HeroService,
         provide(APP_CONFIG, {useValue: CONFIG}), QuestionService
     ]
 })
 
-@RouteConfig([
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: DashboardComponent,
-        useAsDefault: true
-    },
-    {
-        path: '/detail/:id',
-        name: 'HeroDetail',
-        component: HeroDetailComponent
-    },
-    {
-        path: '/heroes',
-        name: 'Heroes',
-        component: HeroesComponent
-    },
-    {
-        path: '/mdcheckbox',
-        name: 'Mdcheckbox',
-        component: MdCheckBox
-    }
-])
+
 
 export class AppComponent {
     title
