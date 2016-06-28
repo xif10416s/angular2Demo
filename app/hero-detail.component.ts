@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
+import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { HeroService } from './hero.service';
 import { OnInit } from '@angular/core';
 
@@ -13,13 +13,15 @@ export class HeroDetailComponent  implements OnInit {
     hero: Hero;
     constructor(
         private heroService: HeroService,
-        private routeParams: RouteParams) {
+        private current: ActivatedRoute) {
     }
 
     ngOnInit() {
-        let id = +this.routeParams.get('id');
-        this.heroService.getHero(id)
-            .then(hero => this.hero = hero);
+        this.current.params.subscribe(params => {
+            let id = +params['id']; // (+) converts string 'id' to a number
+            this.heroService.getHero(id)
+                .then(hero => this.hero = hero);
+        });
     }
 
     goBack() {

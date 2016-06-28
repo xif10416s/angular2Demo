@@ -9,7 +9,7 @@ import {MdCheckbox} from '@angular2-material/checkbox';
       <h2>Standalone Usage</h2>
       <h3>Shopping List</h3>
       <ul>
-        <li *ngFor="#grocery of groceries">
+        <li *ngFor="let grocery of groceries">
           <md-checkbox [checked]="grocery.bought"
                        (change)="grocery.bought = $event">
             {{grocery.name}}
